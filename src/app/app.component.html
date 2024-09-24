@@ -1,0 +1,47 @@
+<head>
+  <title>{{ title }}</title>
+</head>
+<body>
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav fixedInViewport="true" mode="side" opened="{{ sidenavOpened }}">
+    <section [class.opened]="sidenavOpened" class="sidenav">
+      <div class="toggle">
+        <mat-icon (click)="sidenavOpened = !sidenavOpened">
+          {{ sidenavOpened ? "keyboard_backspace" : "dehaze" }}
+        </mat-icon>
+      </div>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/" routerLinkActive="active-link">
+          <mat-icon [matTooltip]="!sidenavOpened ? 'Accueil' : ''" mat-list-icon matTooltipPosition="right">
+            home
+          </mat-icon>
+          @if (sidenavOpened) {
+            <span matLine>Accueil</span>
+          }
+        </a>
+        <a mat-list-item routerLink="/session" routerLinkActive="active-link">
+          <mat-icon [matTooltip]="!sidenavOpened ? 'Session' : ''" mat-list-icon matTooltipPosition="right">
+            sports_basketball
+          </mat-icon>
+          @if (sidenavOpened) {
+            <span matLine>Session</span>
+          }
+        </a>
+        <a mat-list-item routerLink="/admin" routerLinkActive="active-link">
+          <mat-icon [matTooltip]="!sidenavOpened ? 'Admin' : ''" mat-list-icon matTooltipPosition="right">
+            admin_panel_settings
+          </mat-icon>
+          @if (sidenavOpened) {
+            <span matLine>Admin</span>
+          }
+        </a>
+      </mat-nav-list>
+    </section>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div [class.extra-padding]="!sidenavOpened" class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</body>

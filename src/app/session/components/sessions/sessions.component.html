@@ -1,0 +1,37 @@
+<h1>Liste des sessions passées</h1>
+
+<mat-card>
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+    <ng-container matColumnDef="date">
+      <th *matHeaderCellDef mat-header-cell> Date</th>
+      <td *matCellDef="let session" mat-cell> {{ session.date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nbJoueurs">
+      <th *matHeaderCellDef mat-header-cell> Nombre de joueurs</th>
+      <td *matCellDef="let session" mat-cell> {{ session.players.length }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell> &nbsp;</th>
+      <td *matCellDef="let session" mat-cell>
+        @if (session.isToday) {
+          <button class="icon-only" (click)="continue(session)">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+        }
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+
+  <div class="container">
+    <div class="align-right">
+      <button (click)="newSession()" [disabled]="hasSessionForToday" class="btn-primary" mat-flat-button>Créer une
+        nouvelle session
+      </button>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,59 @@
+<h1>Liste des joueurs</h1>
+
+<mat-card>
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+    <ng-container matColumnDef="lastname">
+      <th *matHeaderCellDef mat-header-cell> Nom de famille</th>
+      <td *matCellDef="let player" mat-cell> {{ player.lastname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <th *matHeaderCellDef mat-header-cell> Prénom</th>
+      <td *matCellDef="let player" mat-cell> {{ player.firstname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th *matHeaderCellDef mat-header-cell> Sexe</th>
+      <td *matCellDef="let player" mat-cell>
+        @if (player.gender == 0) {
+          <mat-icon style="color: blue;">male</mat-icon>
+        } @else {
+          <mat-icon style="color: deeppink;">female</mat-icon>
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="post">
+      <th *matHeaderCellDef mat-header-cell> Poste</th>
+      <td *matCellDef="let player" mat-cell> {{ player.post | displayPost }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <th *matHeaderCellDef mat-header-cell> Niveau</th>
+      <td *matCellDef="let player" mat-cell>
+        <app-star-rate [value]="player.level"></app-star-rate>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell>&nbsp;</th>
+      <td *matCellDef="let player" mat-cell>
+        <button (click)="edit(player.uuid)" class="icon-only align-right">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+
+  <div class="container">
+    <div class="align-right">
+      <button (click)="addPlayer()" class="btn-primary" mat-flat-button>Ajouter</button>
+    </div>
+  </div>
+</mat-card>
+
+
+

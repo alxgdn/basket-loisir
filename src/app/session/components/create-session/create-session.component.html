@@ -1,0 +1,46 @@
+<h1>Session du {{ today | date: 'dd/MM/yyyy' }}</h1>
+
+<mat-card>
+  <div class="container">
+    <div class="align-right">
+      Nombre de joueurs présents: {{ currentSession?.players.length }}
+    </div>
+
+    <mat-grid-list cols="6" gutterSize="15px" rowHeight="150px">
+      @for (player of sortedPlayers(); track player) {
+        <mat-grid-tile colspan="1" rowspan="1" [ngClass]="{'selected': currentSession.players | isSelected: player}"
+                       (click)="selectPlayer(player)">
+          <img [ngSrc]="player.picture | fromStorage | async" alt="" fill />
+          <mat-grid-tile-footer>{{ player.firstname }} {{ player.lastname }}</mat-grid-tile-footer>
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+
+    <div class="align-right">
+      <button (click)="generateTeams()" [disabled]="currentSession?.players.length < 10" class="mat-elevation-z1 btn-primary"
+              mat-flat-button type="button">Générer les équipes
+      </button>
+    </div>
+
+    @if (currentSession?.teams.length > 0) {
+      <h2>Equipes générées</h2>
+      <mat-accordion>
+        @for (team of currentSession.teams; track team) {
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> {{ team.color }}</mat-panel-title>
+              <mat-panel-description>
+                <app-star-rate [value]="team.players | averageRate"></app-star-rate>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+              @for (p of team.players; track p) {
+                <li>{{ p.firstname }} {{ p.lastname }}</li>
+              }
+            </ul>
+          </mat-expansion-panel>
+        }
+      </mat-accordion>
+    }
+  </div>
+</mat-card>

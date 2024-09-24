@@ -1,0 +1,42 @@
+.content-container {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 25px;
+
+  &.extra-padding {
+    padding-left: 75px;
+  }
+}
+
+.sidenav {
+  min-width: 50px;
+
+  &.opened {
+    width: 150px;
+  }
+
+  a {
+    &.active-link {
+      // todo
+    }
+
+    .mat-mdc-list-item-unscoped-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
+
+.toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 25px 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+

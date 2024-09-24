@@ -1,0 +1,52 @@
+@import "./assets/styles/normalize.scss";
+@import "./assets/styles/variables.scss";
+
+// FORMS
+input.ng-invalid.ng-dirty {
+  border-color: $error-color;
+}
+
+mat-sidenav[style] {
+  visibility: visible !important;
+}
+
+.mat-drawer {
+  transform: none !important;
+}
+
+.mat-drawer[style*="visibility: hidden"] {
+  display: inline-block !important;
+}
+
+mat-card {
+  padding: 15px;
+}
+
+table {
+  margin-bottom: 15px;
+  tr[mat-header-row] {
+    font-weight: bold;
+  }
+}
+
+button[type="submit"],
+button.btn-primary {
+  &:not(.mat-mdc-button-disabled) {
+    background-color: darkorange !important;
+    color: white !important;
+  }
+}
+
+button.icon-only {
+  background-color: transparent;
+  border: none;
+  color: darkorange;
+}
+
+.align-right {
+  float: right;
+  button+button {
+    margin-left: 15px;
+  }
+}
+

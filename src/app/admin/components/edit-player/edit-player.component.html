@@ -1,0 +1,107 @@
+<h1>
+  @if (!!player) {
+    Modifier un joueur
+  } @else {
+    Créer un nouveau joueur
+  }
+</h1>
+
+<mat-card>
+  <div class="container">
+    <form (submit)="validate()" [formGroup]="formGroup">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Sexe</mat-label>
+            <mat-select
+              formControlName="gender"
+              placeholder="Choisir un sexe"
+              title="Sexe">
+              <mat-option value="0">
+                Homme
+              </mat-option>
+              <mat-option value="1">
+                Femme
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Nom de famille</mat-label>
+            <input
+              formControlName="lastname"
+              matInput
+              maxlength="20"
+              placeholder="Entrer un nom de famille"
+              title="Nom de famille"
+              type="text" />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Prénom</mat-label>
+            <input
+              formControlName="firstname"
+              matInput
+              maxlength="20"
+              placeholder="Entrer un prénom"
+              title="Prénom"
+              type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Poste</mat-label>
+            <mat-select
+              formControlName="post"
+              placeholder="Choisir un poste"
+              title="Poste">
+              <mat-option value="GUARD">
+                Meneur
+              </mat-option>
+              <mat-option value="FORWARD">
+                Ailier
+              </mat-option>
+              <mat-option value="CENTER">
+                Pivot
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Niveau</mat-label>
+            <mat-select
+              formControlName="level"
+              placeholder="Choisir un niveau"
+              title="Niveau">
+              <mat-option value="1">
+                Débutant
+              </mat-option>
+              <mat-option value="2">
+                Confirmé
+              </mat-option>
+              <mat-option value="3">
+                All-star
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="align-right">
+        <button (click)="cancel()" class="mat-elevation-z1" mat-flat-button>Annuler</button>
+        <button [disabled]="formGroup.invalid" class="mat-elevation-z1 btn-primary" mat-flat-button type="submit">
+          Valider
+        </button>
+      </div>
+    </form>
+  </div>
+</mat-card>
