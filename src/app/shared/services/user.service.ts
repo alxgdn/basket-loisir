@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../models/user.model';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { doc, Firestore, getDoc } from '@angular/fire/firestore';
+import { BrowserStorageService } from '../helpers/browser-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +12,18 @@ import { doc, Firestore, getDoc } from '@angular/fire/firestore';
 export class UserService {
 
   private collectionName = 'admins';
-  private userConnected$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private sessionKey = 'user';
+  private userChanged$: BehaviorSubject<void> = new BehaviorSubject<void>(null);
 
-  constructor(private angularFireAuth: AngularFireAuth, private firestore: Firestore) {
+  constructor(private angularFireAuth: AngularFireAuth, private firestore: Firestore, private storage: BrowserStorageService) {
   }
 
-  getUserConnected(): Observable<User> {
-    return this.userConnected$.asObservable();
+  hasUserChanged(): Observable<void> {
+    return this.userChanged$.asObservable();
+  }
+
+  getUserConnected(): User {
+    return this.storage.getFromSessionStorage(this.sessionKey);
   }
 
   loginWithEmail(email: string, password: string): Observable<User> {
@@ -34,7 +40,8 @@ export class UserService {
 
   logout() {
     this.angularFireAuth.signOut().then(() => {
-      this.userConnected$.next(null);
+      this.storage.addToSessionStorage(this.sessionKey, null);
+      this.userChanged$.next();
     });
   }
 
@@ -43,7 +50,8 @@ export class UserService {
       .pipe(
         switchMap((credentials) => this.isAdmin(credentials.user.uid)),
         tap((user) => {
-          this.userConnected$.next(user);
+          this.storage.addToSessionStorage(this.sessionKey, user);
+          this.userChanged$.next();
         }),
       );
   }

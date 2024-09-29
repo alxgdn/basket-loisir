@@ -1,18 +1,19 @@
 import { Component, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatList, MatListItem, MatNavList } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatLine } from '@angular/material/core';
 import { UserService } from './shared/services/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { User } from './shared/models/user.model';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,16 +21,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
   imports: [
     CommonModule,
     RouterOutlet,
-    MatIcon,
+    MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatIconModule,
-    MatIconButton,
     MatSidenavModule,
-    MatNavList,
-    MatListItem,
-    MatButton,
-    MatList,
+    MatButtonModule,
+    MatListModule,
     RouterLinkActive,
     MatTooltip,
     RouterLink,
@@ -40,12 +37,16 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 @UntilDestroy()
 export class AppComponent {
-  title: string = ':';
+  title: string = 'Basket loisir JSA';
   sidenavOpened: boolean = true;
   user: Signal<User>;
 
   constructor(private userService: UserService, private router: Router) {
-    this.user = toSignal(this.userService.getUserConnected().pipe(untilDestroyed(this)));
+    this.user = toSignal(
+      this.userService.hasUserChanged().pipe(
+        untilDestroyed(this),
+        map(() => this.userService.getUserConnected()),
+      ));
   }
 
   login() {
