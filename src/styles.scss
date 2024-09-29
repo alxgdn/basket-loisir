@@ -51,7 +51,7 @@ mat-card {
     }
   }
   @media screen and (max-width:720px) {
-    .col-* {
+    .col-1, .col-2, .col-3, .col-4 {
       width: 100%
     }
   }
