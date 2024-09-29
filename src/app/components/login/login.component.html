@@ -1,0 +1,68 @@
+<h1>Connexion</h1>
+
+<mat-card>
+  <div class="container">
+    <form (submit)="loginWithEmail()" [formGroup]="formGroup">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input
+            formControlName="email"
+            matInput
+            maxlength="50"
+            placeholder="Entrer un email"
+            title="Email"
+            type="email"
+            autocomplete="username" />
+          @if (!!emailFormControl?.errors && !!emailFormControl?.errors['required']) {
+            <mat-error>L'email est requis</mat-error>
+          }
+          @if (!!emailFormControl?.errors && !!emailFormControl?.errors['email']) {
+            <mat-error>L'email est invalide</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Mot de passe</mat-label>
+          <input
+            formControlName="password"
+            matInput
+            maxlength="50"
+            placeholder="Entrer un mot de passe"
+            title="Mot de passe"
+            type="password"
+            autocomplete="current-password" />
+          @if (!!passwordFormControl?.errors && !!passwordFormControl?.errors['required']) {
+            <mat-error>Le mot de passe est requis</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="row">
+        @if (loginError) {
+          <p class="warn">
+            Une erreur est survenue lors de la connexion !
+          </p>
+        }
+        <div class="row align-right">
+          <button [disabled]="formGroup.invalid" class="mat-elevation-z1 btn-primary" mat-flat-button type="submit">
+            Se connecter
+          </button>
+        </div>
+      </div>
+      <div class="row align-center mt">
+        <a routerLink="/signin">Pas encore inscrit ? Créez un compte ici</a>
+      </div>
+    </form>
+  </div>
+</mat-card>
+
+<div class="separator">ou</div>
+
+<div class="auth-buttons">
+  <button class="mat-elevation-z1" mat-flat-button (click)="loginWithGoogle()">
+    <fa-icon [icon]="faGoogle"></fa-icon>
+    Se connecter avec Google
+  </button>
+</div>
+

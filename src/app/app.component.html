@@ -2,46 +2,75 @@
   <title>{{ title }}</title>
 </head>
 <body>
-<mat-sidenav-container autosize>
-  <mat-sidenav #sidenav fixedInViewport="true" mode="side" opened="{{ sidenavOpened }}">
-    <section [class.opened]="sidenavOpened" class="sidenav">
-      <div class="toggle">
-        <mat-icon (click)="sidenavOpened = !sidenavOpened">
-          {{ sidenavOpened ? "keyboard_backspace" : "dehaze" }}
-        </mat-icon>
+  <mat-sidenav-container autosize>
+    <mat-sidenav fixedInViewport="true" mode="side" opened="{{ sidenavOpened }}">
+      <section [class.opened]="sidenavOpened" class="sidenav">
+        <div class="toggle" [matTooltip]="sidenavOpened ? 'Fermer le menu' : 'Ouvrir le menu'" mat-list-icon matTooltipPosition="right">
+          <mat-icon (click)="sidenavOpened = !sidenavOpened">
+            {{ sidenavOpened ? "keyboard_backspace" : "dehaze" }}
+          </mat-icon>
+        </div>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/" routerLinkActive="active-link" [matTooltip]="!sidenavOpened ? 'Accueil' : ''" mat-list-icon matTooltipPosition="right">
+            <mat-icon>home</mat-icon>
+            @if (sidenavOpened) {
+              <span matLine>Accueil</span>
+            }
+          </a>
+          <a mat-list-item routerLink="/photo" routerLinkActive="active-link" [matTooltip]="!sidenavOpened ? 'Trombinoscope' : ''" mat-list-icon matTooltipPosition="right">
+            <mat-icon>photo</mat-icon>
+            @if (sidenavOpened) {
+              <span matLine>Trombinoscope</span>
+            }
+          </a>
+          <a mat-list-item routerLink="/game" routerLinkActive="active-link" [matTooltip]="!sidenavOpened ? 'Matchs' : ''" mat-list-icon matTooltipPosition="right">
+            <mat-icon>scoreboard</mat-icon>
+            @if (sidenavOpened) {
+              <span matLine>Matchs</span>
+            }
+          </a>
+          @if (!!user() && user().isAdmin) {
+            <a mat-list-item routerLink="/session" routerLinkActive="active-link" [matTooltip]="!sidenavOpened ? 'Session' : ''" mat-list-icon matTooltipPosition="right">
+              <mat-icon>sports_basketball</mat-icon>
+              @if (sidenavOpened) {
+                <span matLine>Session</span>
+              }
+            </a>
+            <a mat-list-item routerLink="/admin" routerLinkActive="active-link" [matTooltip]="!sidenavOpened ? 'Admin' : ''" mat-list-icon matTooltipPosition="right">
+              <mat-icon>admin_panel_settings</mat-icon>
+              @if (sidenavOpened) {
+                <span matLine>Admin</span>
+              }
+            </a>
+          }
+        </mat-nav-list>
+      </section>
+      <div class="bottom">
+        @if (!!user()) {
+          <a (click)="logout()" [matTooltip]="!sidenavOpened ? 'Déconnexion' : ''" mat-list-icon matTooltipPosition="right">
+            <mat-icon >
+              logout
+            </mat-icon>
+            @if (sidenavOpened) {
+              <span matLine>Déconnexion</span>
+            }
+          </a>
+        } @else {
+          <a (click)="login()" [matTooltip]="!sidenavOpened ? 'Connexion' : ''" mat-list-icon matTooltipPosition="right">
+            <mat-icon >
+              login
+            </mat-icon>
+            @if (sidenavOpened) {
+              <span matLine>Connexion</span>
+            }
+          </a>
+        }
       </div>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/" routerLinkActive="active-link">
-          <mat-icon [matTooltip]="!sidenavOpened ? 'Accueil' : ''" mat-list-icon matTooltipPosition="right">
-            home
-          </mat-icon>
-          @if (sidenavOpened) {
-            <span matLine>Accueil</span>
-          }
-        </a>
-        <a mat-list-item routerLink="/session" routerLinkActive="active-link">
-          <mat-icon [matTooltip]="!sidenavOpened ? 'Session' : ''" mat-list-icon matTooltipPosition="right">
-            sports_basketball
-          </mat-icon>
-          @if (sidenavOpened) {
-            <span matLine>Session</span>
-          }
-        </a>
-        <a mat-list-item routerLink="/admin" routerLinkActive="active-link">
-          <mat-icon [matTooltip]="!sidenavOpened ? 'Admin' : ''" mat-list-icon matTooltipPosition="right">
-            admin_panel_settings
-          </mat-icon>
-          @if (sidenavOpened) {
-            <span matLine>Admin</span>
-          }
-        </a>
-      </mat-nav-list>
-    </section>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div [class.extra-padding]="!sidenavOpened" class="content-container">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div [class.extra-padding]="!sidenavOpened" class="content-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </body>

@@ -7,23 +7,21 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
     provideAnimations(),
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
     provideFirebaseApp(() => initializeApp(
-      {
-        apiKey: 'AIzaSyDRWE7S7O8CAz2h2FHE1HFG1le-dy7yxfY',
-        authDomain: 'basket-loisir-e29a0.firebaseapp.com',
-        projectId: 'basket-loisir-e29a0',
-        storageBucket: 'basket-loisir-e29a0.appspot.com',
-        messagingSenderId: '21216025081',
-        appId: '1:21216025081:web:a47a5b2fcc3f4ff54dc528',
-      },
+      environment.firebaseConfig,
     )),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    provideAuth(() => getAuth()),
   ],
 };

@@ -1,0 +1,18 @@
+<h1>Trombinoscope</h1>
+
+<mat-card>
+  <div class="container">
+    <div class="align-right">
+      Nombre de joueurs total: {{ sortedPlayers().length }}
+    </div>
+
+    <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="15px" [rowHeight]="height">
+      @for (player of sortedPlayers(); track player) {
+        <mat-grid-tile colspan="1" rowspan="1" (click)="showInfos(player)">
+          <img [ngSrc]="player.picture | fromStorage | async" alt="" fill />
+          <mat-grid-tile-footer>{{ player.firstname }}</mat-grid-tile-footer>
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  </div>
+</mat-card>

@@ -10,7 +10,7 @@
   <div class="container">
     <form (submit)="validate()" [formGroup]="formGroup">
       <div class="row">
-        <div class="col">
+        <div class="col-2">
           <mat-form-field>
             <mat-label>Sexe</mat-label>
             <mat-select
@@ -29,7 +29,7 @@
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-2">
           <mat-form-field>
             <mat-label>Nom de famille</mat-label>
             <input
@@ -41,7 +41,7 @@
               type="text" />
           </mat-form-field>
         </div>
-        <div class="col">
+        <div class="col-2">
           <mat-form-field>
             <mat-label>Prénom</mat-label>
             <input
@@ -56,7 +56,7 @@
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-2">
           <mat-form-field>
             <mat-label>Poste</mat-label>
             <mat-select
@@ -75,7 +75,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col">
+        <div class="col-2">
           <mat-form-field>
             <mat-label>Niveau</mat-label>
             <mat-select
@@ -95,12 +95,11 @@
           </mat-form-field>
         </div>
       </div>
-
-      <div class="align-right">
-        <button (click)="cancel()" class="mat-elevation-z1" mat-flat-button>Annuler</button>
+      <div class="row align-right">
         <button [disabled]="formGroup.invalid" class="mat-elevation-z1 btn-primary" mat-flat-button type="submit">
           Valider
         </button>
+        <button (click)="cancel()" class="mat-elevation-z1" mat-flat-button>Annuler</button>
       </div>
     </form>
   </div>

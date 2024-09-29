@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { PhotoComponent } from './components/photo/photo.component';
 import { IsAdminGuard } from './shared/guards/is-admin.guard';
+import { SigninComponent } from './components/signin/signin.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
   {
@@ -10,9 +13,29 @@ export const routes: Routes = [
     canActivate: [],
   },
   {
+    path: 'photo',
+    component: PhotoComponent,
+    canActivate: [],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [],
+  },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    canActivate: [],
+  },
+  {
+    path: 'game',
+    loadChildren: () => import('./game/game.module').then((m) => m.GameModule),
+    canActivate: [],
+  },
+  {
     path: 'session',
     loadChildren: () => import('./session/session.module').then((m) => m.SessionModule),
-    canActivate: [],
+    canActivate: [IsAdminGuard],
   },
   {
     path: 'admin',

@@ -12,7 +12,7 @@
   min-width: 50px;
 
   &.opened {
-    width: 150px;
+    width: 170px;
   }
 
   a {
@@ -25,18 +25,40 @@
       flex-direction: row;
       align-items: center;
     }
+
+    .mat-line {
+      position: absolute;
+      margin: 2px 0 0 5px;
+    }
+  }
+
+  .toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
-.toggle {
-  width: 100%;
+.bottom {
+  position: absolute;
+  bottom: 20px;
   display: flex;
   justify-content: space-around;
-  padding: 25px 0;
+  width: 100%;
 
   &:hover {
     cursor: pointer;
   }
+
+  a {
+    display: flex;
+    .mat-line {
+      align-content: center;
+    }
+  }
 }
-
-
