@@ -6,7 +6,7 @@
       Nombre de joueurs présents: {{ currentSession?.players.length }}
     </div>
 
-    <mat-grid-list cols="6" gutterSize="15px" rowHeight="150px">
+    <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="15px" [rowHeight]="height">
       @for (player of sortedPlayers(); track player) {
         <mat-grid-tile colspan="1" rowspan="1" [ngClass]="{'selected': currentSession.players | isSelected: player}"
                        (click)="selectPlayer(player)">

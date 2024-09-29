@@ -6,7 +6,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
 import { Session } from '../../../shared/models/session.model';
 import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import moment from 'moment';
 import { DateUtils } from '../../../shared/helpers/date.utils';
@@ -20,6 +20,7 @@ import { DateUtils } from '../../../shared/helpers/date.utils';
     MatTableModule,
     MatIcon,
     DatePipe,
+    RouterLink,
   ],
   templateUrl: './sessions.component.html',
 })
@@ -49,6 +50,6 @@ export class SessionsComponent implements OnInit {
   }
 
   continue(session: Session) {
-    this.router.navigateByUrl(`/session/create/${session.uuid}`);
+    this.router.navigateByUrl(`/session/create/${session.uuid}`).then();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, computed, Signal } from '@angular/core';
+import { Component, computed, OnInit, Signal } from '@angular/core';
 import { SessionService } from '../../../shared/services/session.service';
 import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
@@ -48,12 +48,14 @@ import { FromStoragePipe } from '../../../shared/pipes/from-storage.pipe';
   styleUrl: './create-session.component.scss',
 })
 @UntilDestroy()
-export class CreateSessionComponent {
+export class CreateSessionComponent implements OnInit {
 
   allPlayers: Signal<Player[]>;
   sortedPlayers: Signal<Player[]>;
   today: Date;
   currentSession: Session;
+  breakpoint: number = 6;
+  height: number = 150;
 
   constructor(private sessionService: SessionService, private playerService: PlayerService, route: ActivatedRoute) {
     this.allPlayers = toSignal(this.playerService.getPlayers(), { initialValue: [] });
@@ -82,6 +84,18 @@ export class CreateSessionComponent {
       .subscribe((session) => {
         this.currentSession = session;
       });
+  }
+
+  ngOnInit() {
+    if (window.innerWidth <= 720) {
+      this.breakpoint = 3;
+      this.height = 120;
+    }
+  }
+
+  onResize($event: any) {
+    this.breakpoint = ($event.target.innerWidth <= 720) ? 3 : 6;
+    this.height = ($event.target.innerWidth <= 720) ? 120 : 150;
   }
 
   selectPlayer(player: Player) {

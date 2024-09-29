@@ -1,0 +1,80 @@
+<h1>Inscription</h1>
+
+<mat-card>
+  <div class="container">
+    <form (submit)="signin()" [formGroup]="formGroup">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input
+            formControlName="email"
+            matInput
+            maxlength="50"
+            placeholder="Entrer un email"
+            title="Email"
+            type="email"
+            autocomplete="username" />
+          @if (!!emailFormControl?.errors && !!emailFormControl?.errors['required']) {
+            <mat-error>L'email est requis</mat-error>
+          }
+          @if (!!emailFormControl?.errors && !!emailFormControl?.errors['email']) {
+            <mat-error>L'email est invalide</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Mot de passe</mat-label>
+          <input
+            formControlName="password"
+            matInput
+            maxlength="50"
+            placeholder="Entrer un mot de passe"
+            title="Mot de passe"
+            type="password"
+            autocomplete="new-password" />
+          @if (!!passwordFormControl?.errors && !!passwordFormControl?.errors['required']) {
+            <mat-error>Le mot de passe est requis</mat-error>
+          }
+          @if (!!passwordFormControl?.errors && !!passwordFormControl?.errors['pattern']) {
+            <mat-error>Le mot de passe doit comporter au minimum 8 caractères mélangeant les majuscules, les minuscules, des chiffres et des caractères spéciaux</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Confirmer le mot de passe</mat-label>
+          <input
+            formControlName="confirmPassword"
+            matInput
+            maxlength="50"
+            placeholder="Confirmer le mot de passe"
+            title="Confirmer le mot de passe"
+            type="password"
+            autocomplete="new-password" />
+          @if (!!confirmPasswordFormControl?.errors && !!confirmPasswordFormControl?.errors['required']) {
+            <mat-error>La confirmation du mot de passe est requise</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="row">
+        @if (!!formGroup?.errors && !!formGroup?.errors['passwordMismatch']) {
+          <p class="warn">Les 2 mots de passes ne correspondent pas</p>
+        }
+        @if (userExistsError) {
+          <p class="warn">L'utilisateur existe déjà</p>
+        }
+        @if (genericError) {
+          <p class="warn">Une erreur est survenue lors de l'inscription</p>
+        }
+      </div>
+      <div class="row">
+        <div class="align-right">
+          <button [disabled]="formGroup.invalid" class="mat-elevation-z1 btn-primary" mat-flat-button type="submit">
+            Valider
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-card>

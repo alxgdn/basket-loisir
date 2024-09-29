@@ -1,11 +1,7 @@
 @import "./assets/styles/normalize.scss";
 @import "./assets/styles/variables.scss";
 
-// FORMS
-input.ng-invalid.ng-dirty {
-  border-color: $error-color;
-}
-
+/* Material override */
 mat-sidenav[style] {
   visibility: visible !important;
 }
@@ -18,8 +14,47 @@ mat-sidenav[style] {
   display: inline-block !important;
 }
 
+/* Forms */
+input.ng-invalid.ng-dirty {
+  border-color: $error-color;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* Display */
 mat-card {
   padding: 15px;
+}
+
+.mt {
+  margin-top: 1rem;
+}
+
+.row {
+  display: inline-block;
+  width: 100%;
+
+  @media screen and (min-width:720px) {
+    .col-1 {
+      width: 100%
+    }
+    .col-2 {
+      width: 50%;
+    }
+    .col-3 {
+      width: 33%;
+    }
+    .col-4 {
+      width: 25%;
+    }
+  }
+  @media screen and (max-width:720px) {
+    .col-* {
+      width: 100%
+    }
+  }
 }
 
 table {
@@ -29,6 +64,26 @@ table {
   }
 }
 
+.align-right {
+  display: flex;
+  flex-direction: row-reverse;
+  button+button {
+    margin-right: 15px;
+  }
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+}
+
+p {
+  &.warn {
+    color: $error-color;
+  }
+}
+
+/* Buttons */
 button[type="submit"],
 button.btn-primary {
   &:not(.mat-mdc-button-disabled) {
@@ -41,12 +96,5 @@ button.icon-only {
   background-color: transparent;
   border: none;
   color: darkorange;
-}
-
-.align-right {
-  float: right;
-  button+button {
-    margin-left: 15px;
-  }
 }
 
