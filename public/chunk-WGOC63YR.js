@@ -1,0 +1,1 @@
+import{G as r}from"./chunk-PF65G2OF.js";var n=(()=>{class t{constructor(){}canActivate(){return!0}static{this.\u0275fac=function(e){return new(e||t)}}static{this.\u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{n as a};
