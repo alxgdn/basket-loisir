@@ -188,8 +188,10 @@ export class CreateSessionComponent implements OnInit {
     // Si la différence de moyenne des 2 est supérieure à 0.4
     if (TeamUtils.calculateAverageRate(strongestTeam.players) - TeamUtils.calculateAverageRate(weakestTeam.players) > 0.4) {
       // On fait des swaps que sur des garçons
-      const allStarPlayersFromWeakestTeam: Player[] = weakestTeam.players.filter((p) => +p.level === 3 && p.gender == Gender.MALE);
-      const allStarPlayersFromStrongestTeam: Player[] = strongestTeam.players.filter((p) => +p.level === 3 && p.gender == Gender.MALE);
+      const allStarPlayersFromWeakestTeam: Player[] = weakestTeam.players.filter((p) => +p.level === 4 && p.gender == Gender.MALE);
+      const allStarPlayersFromStrongestTeam: Player[] = strongestTeam.players.filter((p) => +p.level === 4 && p.gender == Gender.MALE);
+      const veteranPlayersFromWeakestTeam: Player[] = weakestTeam.players.filter((p) => +p.level === 3 && p.gender == Gender.MALE);
+      const veteranPlayersFromStrongestTeam: Player[] = strongestTeam.players.filter((p) => +p.level === 3 && p.gender == Gender.MALE);
       const intermediatePlayersFromWeakestTeam: Player[] = weakestTeam.players.filter((p) => +p.level === 2 && p.gender == Gender.MALE);
       const intermediatePlayersFromStrongestTeam: Player[] = strongestTeam.players.filter((p) => +p.level === 2 && p.gender == Gender.MALE);
       if (allStarPlayersFromWeakestTeam.length < allStarPlayersFromStrongestTeam.length && allStarPlayersFromStrongestTeam.length > 1) {
@@ -198,6 +200,13 @@ export class CreateSessionComponent implements OnInit {
           strongestTeam,
           this.determinateWeakPlayerToSwap(weakestTeam, allStarPlayersFromStrongestTeam[0]),
           allStarPlayersFromStrongestTeam[0],
+        );
+      } else if (veteranPlayersFromWeakestTeam.length < veteranPlayersFromStrongestTeam.length) {
+        this.swapPlayers(
+          weakestTeam,
+          strongestTeam,
+          this.determinateWeakPlayerToSwap(weakestTeam, veteranPlayersFromStrongestTeam[0]),
+          veteranPlayersFromStrongestTeam[0],
         );
       } else if (intermediatePlayersFromWeakestTeam.length < intermediatePlayersFromStrongestTeam.length) {
         this.swapPlayers(

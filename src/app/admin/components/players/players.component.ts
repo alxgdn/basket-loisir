@@ -9,6 +9,7 @@ import { PlayerService } from '../../../shared/services/player.service';
 import { DisplayPostPipe } from '../../../shared/pipes/display-post.pipe';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { StarRateComponent } from '../../../shared/components/star-rate/star-rate.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-players',
@@ -20,6 +21,7 @@ import { StarRateComponent } from '../../../shared/components/star-rate/star-rat
     MatIcon,
     DisplayPostPipe,
     StarRateComponent,
+    MatSortModule,
   ],
   templateUrl: './players.component.html',
 })
@@ -39,12 +41,10 @@ export class PlayersComponent implements OnInit {
   }
 
   addPlayer() {
-    this.router.navigateByUrl('/admin/players/add').then(r => {
-    });
+    this.router.navigateByUrl('/admin/players/add').then();
   }
 
   edit(uuid: string) {
-    this.router.navigateByUrl(`/admin/players/edit/${uuid}`).then(r => {
-    });
+    this.router.navigateByUrl(`/admin/players/edit/${uuid}`).then();
   }
 }
