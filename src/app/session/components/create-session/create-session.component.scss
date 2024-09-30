@@ -12,3 +12,32 @@
     }
   }
 }
+
+.team-color {
+  border-radius: 8px;
+  border: 1px solid white;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+
+  &.noir {
+    background-color: black;
+  }
+  &.bleu {
+    background-color: blue;
+  }
+  &.rouge {
+    background-color: red;
+  }
+  &.jaune {
+    background-color: yellow;
+  }
+  &.vert {
+    background-color: green;
+  }
+  &.blanc {
+    background-color: white;
+    border-color: #dddddd;
+  }
+
+}

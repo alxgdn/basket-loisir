@@ -17,8 +17,11 @@
     </mat-grid-list>
 
     <div class="align-right">
-      <button (click)="generateTeams()" [disabled]="currentSession?.players.length < 10" class="mat-elevation-z1 btn-primary"
-              mat-flat-button type="button">Générer les équipes
+      <button (click)="generateTeams()"
+              [disabled]="currentSession?.players.length < 10" class="mat-elevation-z1 btn-primary"
+              mat-flat-button
+              type="button">
+        Générer les équipes
       </button>
     </div>
 
@@ -28,14 +31,17 @@
         @for (team of currentSession.teams; track team) {
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title> {{ team.color }}</mat-panel-title>
+              <mat-panel-title>
+                <span class="team-color" [ngClass]="team.color | lowercase"></span>
+                <strong>{{ team.color }}</strong>
+              </mat-panel-title>
               <mat-panel-description>
                 <app-star-rate [value]="team.players | averageRate"></app-star-rate>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <ul>
               @for (p of team.players; track p) {
-                <li>{{ p.firstname }} {{ p.lastname }}</li>
+                <li>{{ p.firstname }} {{ p.lastname }} ({{p.post | displayPost}})</li>
               }
             </ul>
           </mat-expansion-panel>

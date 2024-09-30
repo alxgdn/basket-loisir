@@ -27,7 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
 })
 @UntilDestroy()
 export class PlayersComponent implements OnInit {
-  displayedColumns = ['lastname', 'firstname', 'gender', 'post', 'level', 'actions'];
+  displayedColumns = ['firstname', 'lastname', 'gender', 'post', 'level', 'actions'];
   dataSource: MatTableDataSource<Player>;
 
   constructor(private router: Router, private playerService: PlayerService) {
@@ -36,7 +36,9 @@ export class PlayersComponent implements OnInit {
 
   ngOnInit() {
     this.playerService.getPlayers().pipe(untilDestroyed(this)).subscribe((players) => {
-      this.dataSource.data = players;
+      this.dataSource.data = players.sort((a, b) => {
+        return a.firstname.localeCompare(b.firstname, 'fr', { ignorePunctuation: true });
+      });
     });
   }
 

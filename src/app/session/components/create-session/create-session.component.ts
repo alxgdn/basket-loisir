@@ -4,7 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
-import { AsyncPipe, DatePipe, JsonPipe, NgClass, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, DatePipe, JsonPipe, LowerCasePipe, NgClass, NgOptimizedImage } from '@angular/common';
 import { PlayerService } from '../../../shared/services/player.service';
 import { Gender, Player, Post } from '../../../shared/models/player.model';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -23,6 +23,7 @@ import { AverageRatePipe } from '../../../shared/pipes/average-rate.pipe';
 import { StarRateComponent } from '../../../shared/components/star-rate/star-rate.component';
 import { TeamUtils } from '../../../shared/helpers/team.utils';
 import { FromStoragePipe } from '../../../shared/pipes/from-storage.pipe';
+import { DisplayPostPipe } from '../../../shared/pipes/display-post.pipe';
 
 @Component({
   selector: 'app-session',
@@ -43,6 +44,8 @@ import { FromStoragePipe } from '../../../shared/pipes/from-storage.pipe';
     AsyncPipe,
     FromStoragePipe,
     NgOptimizedImage,
+    DisplayPostPipe,
+    LowerCasePipe,
   ],
   templateUrl: './create-session.component.html',
   styleUrl: './create-session.component.scss',

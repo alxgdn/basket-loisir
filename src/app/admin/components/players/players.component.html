@@ -1,7 +1,7 @@
 <h1>Liste des joueurs</h1>
 
 <mat-card>
-  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
     <ng-container matColumnDef="lastname">
       <th *matHeaderCellDef mat-header-cell> Nom de famille</th>
       <td *matCellDef="let player" mat-cell> {{ player.lastname }}</td>
@@ -54,6 +54,3 @@
     </div>
   </div>
 </mat-card>
-
-
-

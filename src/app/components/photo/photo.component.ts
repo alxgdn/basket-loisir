@@ -6,6 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { PlayerService } from '../../shared/services/player.service';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { FromStoragePipe } from '../../shared/pipes/from-storage.pipe';
+import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-photo',
@@ -20,6 +21,7 @@ import { FromStoragePipe } from '../../shared/pipes/from-storage.pipe';
     NgOptimizedImage,
     FromStoragePipe,
     AsyncPipe,
+    TruncatePipe,
   ],
   standalone: true,
 })
