@@ -1,0 +1,8 @@
+<div class="container mx-auto">
+  <form class=" bg-white p-10" (submit)="onSubmit()" [formGroup]="searchForm">
+    <div class="mb-4 flex items-center">
+      <input type="text"  formControlName="query" class="w-full rounded-lg border border-gray-400 p-2" placeholder="nom ou prenom..." />
+      <button class="ml-2 rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600">Rechercher</button>
+    </div>
+  </form>
+</div>

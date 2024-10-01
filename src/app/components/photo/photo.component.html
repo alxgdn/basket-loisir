@@ -1,18 +1,30 @@
-<h1>Trombinoscope</h1>
-
+<h1 class="font-bold leading-snug tracking-tight text-slate-800 my-8 w-full text-2xl lg:max-w-3xl lg:text-5xl">
+  Trombinoscope
+</h1>
 <mat-card>
   <div class="container">
-    <div class="align-right">
-      Nombre de joueurs total: {{ sortedPlayers().length }}
+    <app-search (queryValue)="onSearchChanged($event)" />
+    <div class="container px-5 py-8 mx-auto">
+
+      @if (searchValue) {
+        <small>Résultat de la recherche : <i class="font-semibold">( {{searchValue.toUpperCase()}} )</i></small>
+      }
+      @if (!searchValue) {
+        <small class="align-right">
+          Nombre de joueurs total: {{ sortedPlayers().length }}
+        </small>
+      }
+
+      <div class="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
+        @for (player of sortedPlayers() | filter: searchValue : ['lastname', 'firstname']; track player) {
+          <card-photo-item [player]="player" />
+        } @empty {
+          <p>Aucun résultat</p>
+        }
+      </div>
     </div>
 
-    <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="15px" [rowHeight]="height">
-      @for (player of sortedPlayers(); track player) {
-        <mat-grid-tile colspan="1" rowspan="1" (click)="showInfos(player)">
-          <img [src]="player.picture | fromStorage | async" alt="" [width]="height" [height]="height" />
-          <mat-grid-tile-footer>{{ player.firstname }} {{ player.lastname | truncate: 1 : '.' }}</mat-grid-tile-footer>
-        </mat-grid-tile>
-      }
-    </mat-grid-list>
   </div>
 </mat-card>
+
+

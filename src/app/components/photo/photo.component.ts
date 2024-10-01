@@ -7,6 +7,9 @@ import { PlayerService } from '../../shared/services/player.service';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { FromStoragePipe } from '../../shared/pipes/from-storage.pipe';
 import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
+import { CardPhotoItemComponent } from '../../shared/components/card-photo-item/card-photo-item.component';
+import { SearchComponent } from '../../shared/components/search/search.component';
+import { FilterPipe } from '../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-photo',
@@ -22,6 +25,9 @@ import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
     FromStoragePipe,
     AsyncPipe,
     TruncatePipe,
+    CardPhotoItemComponent,
+    SearchComponent,
+    FilterPipe,
   ],
   standalone: true,
 })
@@ -30,6 +36,7 @@ export class PhotoComponent implements OnInit {
   height: number = 150;
   allPlayers: Signal<Player[]>;
   sortedPlayers: Signal<Player[]>;
+  protected searchValue = "";
 
   constructor(private playerService: PlayerService) {
     this.allPlayers = toSignal(this.playerService.getPlayers(), { initialValue: [] });
@@ -54,5 +61,9 @@ export class PhotoComponent implements OnInit {
 
   showInfos(player: Player) {
     // todo
+  }
+
+  onSearchChanged($event: string) {
+    this.searchValue = $event;
   }
 }
