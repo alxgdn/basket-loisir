@@ -5,10 +5,11 @@
   <div class="container">
     <app-search (queryValue)="onSearchChanged($event)" />
     <div class="container px-5 py-8 mx-auto">
-
+      
       @if (searchValue) {
         <small>Résultat de la recherche : <i class="font-semibold">( {{searchValue.toUpperCase()}} )</i></small>
       }
+      
       @if (!searchValue) {
         <small class="align-right">
           Nombre de joueurs total: {{ sortedPlayers().length }}
