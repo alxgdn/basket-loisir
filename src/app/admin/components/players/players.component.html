@@ -1,6 +1,6 @@
 <h1>Liste des joueurs</h1>
 
-<mat-card>
+<mat-card (window:resize)="onWindowResize($event)">
   <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
     <ng-container matColumnDef="lastname">
       <th *matHeaderCellDef mat-header-cell> Nom de famille</th>
