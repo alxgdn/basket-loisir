@@ -9,7 +9,7 @@
     <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" gutterSize="15px" [rowHeight]="height">
       @for (player of sortedPlayers(); track player) {
         <mat-grid-tile colspan="1" rowspan="1" (click)="showInfos(player)">
-          <img [src]="player.picture | fromStorage | async" alt="" [width]="height" [height]="height" />
+          <img [src]="player.picture" alt="" [width]="height" [height]="height" />
           <mat-grid-tile-footer>{{ player.firstname }} {{ player.lastname | truncate: 1 : '.' }}</mat-grid-tile-footer>
         </mat-grid-tile>
       }

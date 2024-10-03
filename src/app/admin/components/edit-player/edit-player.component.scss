@@ -1,0 +1,34 @@
+.file-container {
+  border: dashed 1px #979797;
+  border-radius: 5px;
+
+  .fileover {
+    background-color: #fafafa;
+  }
+
+  .preview {
+    padding: 10px;
+
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .align-center {
+    padding: 15px;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.align-right {
+  margin-top: 8px;
+  .btn-danger {
+    background-color: #f44336;
+    color: white;
+  }
+}

@@ -98,11 +98,54 @@
           </mat-form-field>
         </div>
       </div>
+      <div class="row">
+        <div class="col-2">
+          <div class="file-container">
+            @if (!!formGroup.get('picture')?.value) {
+              <div class="preview">
+                <img [src]="formGroup.get('picture')?.value" alt="picture" />
+              </div>
+            } @else {
+              <div dropFile (fileDropped)="fileDropped($event)">
+                <div class="align-center">
+                  <small>
+                    <mat-icon>file_upload</mat-icon>
+                  </small>
+                  <small>Déposer le fichier ici</small>
+                  <p>OU</p>
+                  <button class="btn-primary" mat-raised-button type="button" (click)="fileInput.click()">Parcourir
+                  </button>
+                </div>
+              </div>
+            }
+            <input
+              hidden="hidden"
+              #fileInput
+              class="file-input"
+              type="file"
+              accept="image/*"
+              (change)="onPictureChange($event)" />
+          </div>
+          @if (!!formGroup.get('picture')?.value) {
+            <div class="align-right">
+              <button type="button" class="btn-danger" mat-flat-button (click)="deletePicture()">
+                <mat-icon>delete</mat-icon>
+                Supprimer
+              </button>
+            </div>
+          }
+          @if (hasPictureError) {
+            <p class="warn">
+              Une erreur est survenue lors de l'upload de l'image.
+            </p>
+          }
+        </div>
+      </div>
       <div class="row align-right">
         <button [disabled]="formGroup.invalid" class="mat-elevation-z1 btn-primary" mat-flat-button type="submit">
           Valider
         </button>
-        <button (click)="cancel()" class="mat-elevation-z1" mat-flat-button>Annuler</button>
+        <button type="button" (click)="cancel()" class="mat-elevation-z1" mat-flat-button>Annuler</button>
       </div>
     </form>
   </div>
