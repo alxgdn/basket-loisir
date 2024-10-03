@@ -1,5 +1,8 @@
 @import "./assets/styles/normalize.scss";
 @import "./assets/styles/variables.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Material override */
 mat-sidenav[style] {
