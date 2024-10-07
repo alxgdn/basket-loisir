@@ -19,6 +19,8 @@ import { DisplayPostPipe } from '../../pipes/display-post.pipe';
 })
 export class CardPhotoItemComponent {
   @Input({ required: true }) player: Player = {} as Player;
+  @Input() showRating: boolean = false;
+  @Input() selected: boolean = false;
   protected readonly Array = Array;
   protected readonly Number = Number;
 }

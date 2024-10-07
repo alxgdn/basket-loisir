@@ -2,14 +2,9 @@
   Trombinoscope
 </h1>
 <mat-card>
-  <div class="container">
+  <div>
     <app-search (queryValue)="onSearchChanged($event)" />
-    <div class="container px-5 py-8 mx-auto">
-      
-      @if (searchValue) {
-        <small>Résultat de la recherche : <i class="font-semibold">( {{searchValue.toUpperCase()}} )</i></small>
-      }
-      
+    <div class="py-8 mx-auto">     
       @if (!searchValue) {
         <small class="align-right">
           Nombre de joueurs total: {{ sortedPlayers().length }}
@@ -18,7 +13,7 @@
 
       <div class="flex items-center justify-center flex-wrap gap-2 lg:gap-4">
         @for (player of sortedPlayers() | filter: searchValue : ['lastname', 'firstname']; track player) {
-          <card-photo-item [player]="player" />
+          <card-photo-item [player]="player" [showRating]="false" />
         } @empty {
           <p>Aucun résultat</p>
         }

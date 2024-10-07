@@ -1,17 +1,19 @@
 <div
-  class="cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg  hover:shadow-lg transition-shadow duration-300"
-  [ngClass]="player.gender == 1 ?'hover:shadow-pink-400':'hover:shadow-blue-400'">
+  class="cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg items-center hover:shadow-lg transition-shadow duration-300 max-w-64 min-w-64"
+ [ngClass]="{ 'border-4 border-amber-600': selected, 'hover:shadow-pink-400': player.gender == 1, 'hover:shadow-blue-400': player.gender != 1 }">
 
-  <div class="flex items-center rounded-tl-lg bg-gray-900 w-min px-1 py-1.5">
-    @for (star of Array(Number(player.level)); track star) {
-      <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-           fill="currentColor" viewBox="0 0 22 20">
-        <path
-          d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-      </svg>
-    }
-    <!--    <small class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">{{player.level}}</small>-->
-  </div>
+  @if (showRating) {
+    <div class="flex items-center rounded-tl-lg bg-gray-900 w-min px-1 py-1.5">
+      @for (star of Array(Number(player.level)); track star) {
+        <svg class="w-4 h-4 text-yellow-300 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 22 20">
+          <path
+            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+        </svg>
+      }
+      <!--    <small class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">{{player.level}}</small>-->
+    </div>
+  }
 
   <div class="relative h-min m-2.5 overflow-hidden text-white rounded-md">
     @if (player.picture) {
@@ -21,17 +23,20 @@
     } @else {
       <img
         class="transition-transform h-36 duration-500 ease-[cubic-bezier(0.25, 1, 0.5, 1)] transform group-hover:scale-110"
-        src="https://api.dicebear.com/9.x/initials/svg?seed={{player.firstname}}{{player.lastname}}"
+        [src]="'https://api.dicebear.com/9.x/initials/svg?seed=' + (player.firstname | truncate : 1) + (player.lastname | truncate : 1)"
         alt="{{player.firstname}}" />
     }
   </div>
-  <div class="p-4">
-    <div
-      class="mb-4 rounded-full bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
-      {{ player.post | displayPost }}
-    </div>
+  <div>
     <h6 class="mb-2 text-slate-800 text-xl font-semibold">
       {{ player.firstname }} {{ player.lastname | truncate: 1 : '.' }}
     </h6>
+    <p class="mb-4 mx-auto rounded-full py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center" [ngClass]="{
+      'bg-cyan-600': player.post === 'GUARD',
+      'bg-cyan-900': player.post === 'FORWARD',
+      'bg-cyan-1200': player.post === 'CENTER',
+    }">
+      {{ player.post | displayPost }}
+    </p>
   </div>
 </div>

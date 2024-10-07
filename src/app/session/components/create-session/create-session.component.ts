@@ -24,6 +24,7 @@ import { StarRateComponent } from '../../../shared/components/star-rate/star-rat
 import { TeamUtils } from '../../../shared/helpers/team.utils';
 import { FromStoragePipe } from '../../../shared/pipes/from-storage.pipe';
 import { DisplayPostPipe } from '../../../shared/pipes/display-post.pipe';
+import { CardPhotoItemComponent } from '../../../shared/components/card-photo-item/card-photo-item.component';
 
 @Component({
   selector: 'app-session',
@@ -38,7 +39,6 @@ import { DisplayPostPipe } from '../../../shared/pipes/display-post.pipe';
     NgClass,
     IsSelectedPipe,
     MatExpansionModule,
-    JsonPipe,
     AverageRatePipe,
     StarRateComponent,
     AsyncPipe,
@@ -46,6 +46,7 @@ import { DisplayPostPipe } from '../../../shared/pipes/display-post.pipe';
     NgOptimizedImage,
     DisplayPostPipe,
     LowerCasePipe,
+    CardPhotoItemComponent,
   ],
   templateUrl: './create-session.component.html',
   styleUrl: './create-session.component.scss',

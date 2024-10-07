@@ -12,6 +12,8 @@ import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class SearchComponent {
 
+  filters: string;
+
   queryValue = output<string>();
   private formBuilder: FormBuilder = inject(FormBuilder);
   protected searchForm = this.formBuilder.group({
@@ -20,6 +22,7 @@ export class SearchComponent {
 
   onSubmit() {
     this.queryValue.emit(this.searchForm.getRawValue().query);
+    this.filters = this.searchForm.get('query')?.value;
     this.searchForm.reset({ query: ''});
   }
 
